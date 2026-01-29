@@ -1,15 +1,18 @@
 #ifndef SLLNode_H
 #define SLLNode_H
 
+
+template <typename T>
 class SLLNode{
+// <T> - default template constructor
 public:
-    SLLNode(int d = 0, SLLNode *n = nullptr) {
+    SLLNode(const T& d = T(), SLLNode<T> *n = nullptr) {
         data = d;
         next = n;
     }
 
-    int data;
-    SLLNode *next; // pointer to the next node
+    T data;
+    SLLNode<T> *next; // pointer to the next node
 };
 
 #endif

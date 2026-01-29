@@ -1,18 +1,16 @@
 #include "SLList.hpp"
+#include "SLList.cpp"
+#include <string>
 
 int main(void) {
-    SLList list;
-    list.push_front(1);
-    list.push_front(2);
-    list.push_front(3);
-    list.push_front(4);
-
-    list.push_back(9);
-    list.push_back(8);
-    list.push_back(7);
-    list.push_back(6);
+    SLList<std::string> list;
+    list.push_front("tommorow");
+    list.push_front("will");
+    list.push_front("be");
+    list.push_front("great");
 
     list.print();
 
+    
     return 0;
 }

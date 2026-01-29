@@ -6,3 +6,4 @@ created a linked list using pointers
 
 ## 02_SLLNode
 created a linked list using head and tail
+used template<T> for dynamic data types
