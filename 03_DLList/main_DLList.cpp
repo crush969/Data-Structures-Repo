@@ -17,9 +17,10 @@ int main(void) {
 
     list.print();
 
-    list.pop_back();
+    list.pop_front();
+    //list.pop_back();
 
-    list.print();
+    //list.print();
     //list.print_backwards();
 
 
