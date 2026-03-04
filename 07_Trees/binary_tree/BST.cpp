@@ -290,3 +290,20 @@ void BST<T>::deleteNodeWithTwoChildren(BTNode<T>* node) {
     }
     node->data = min_val;
 }
+
+template <typename T>
+int BST<T>::getHeight(const BTNode<T>* node) const {}
+
+template <typename T>
+int BST<T>::getBalance(const BTNode<T>* node) const {}
+
+template <typename T>
+void BST<T>::rotateRight(BTNode<T>* & node) {
+    if (!node || !node->left) {
+        return;
+    }
+    BTNode<T>* left_kid = node->left;
+    node->left = left->kid->right;
+    left_kid->right = node;
+    node = left_kid;
+}
