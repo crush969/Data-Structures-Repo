@@ -142,62 +142,89 @@ BTNode<T>* BST<T>::search(const T& val) const {
         }
     }
 
-
-    
     return nullptr;
 }
 
-template<typename T>
+template <typename T>
 BTNode<T>* BST<T>::getMinNode() const {
-    if (empty()) {
+    return getMinNode(root);
+}
+
+template<typename T>
+BTNode<T>* BST<T>::getMinNode(BTNode<T>* node) const {
+    if (!node) {
         return nullptr;
     }
-
-    BTNode<T>* cur = root;
-
-    while(cur->left != nullptr){
-        cur = cur->left;
+    else if (!node->left) {
+        return node;
     }
-
-    return cur;
+    return getMinNode(node->left);
 }
 
 template<typename T>
 BTNode<T>* BST<T>::searchParent(const T& val) const {
-    BTNode<T>* check = root;
-
-    while(true) {
-        if (check == nullptr) {
-            return nullptr;
-        }
-        if (check->data == val) {
-            return nullptr;
-        }
-        if(check->left && check->left->data == val) {
-            return check;
-        }
-        if(check->right && check->right->data == val) {
-            return check;
-        }
-        
-        if(val > check->data) {
-            check = check->right;
-            continue;
-        }
-        if(val < check->data) {
-            check = check->left;
-            continue;
-        }
-
-    }
-}
-
-/*template<typename T>
-void BST<T>::deleteLeaf(BTNode<T>* child, BTNode<T>* parent) {
-    if (child == root) {
+    if (root->data == val) { // root doesnt have a parent
         return nullptr;
     }
-}*/
+
+    BTNode<T>* node = root;
+    BTNode<T>* prev = root;
+
+    while (node) {
+        if (node->data == val) {
+            return prev;
+        }
+        prev = node;
+        if (val < node->data) {
+            node = node->left;
+        }
+        else if (val > node->data) {
+            node = node->right;
+        }
+    }
+
+    return nullptr;
+}
+
+template<typename T>
+void BST<T>::deleteLeaf(BTNode<T>* child, BTNode<T>* parent) {
+    if (!child) {
+        return;   
+    }
+    if (!parent) { // This is the root
+        delete root;
+        root = nullptr;
+        return;
+    }
+    if (parent->left == child) { // left kid
+        parent->left = nullptr;
+    }
+    else if (parent->right == child) { // right kid
+        parent->right = nullptr;
+    }
+
+    delete child;
+}
+
+template <typename T>
+void BST<T>::deleteNodeWithOneChild(BTNode<T>* child, BTNode<T>* parent) {
+    if (child == root) {
+        BTNode<T>* to_delete = root;
+        root = (root->left) ? root->left : root->right;
+        delete to_delete;
+        return;
+    }
+    BTNode<T>* grand_kid = (child->right) ? child->right : child->left;
+    if (parent->right == child) {
+        parent->right = grand_kid;
+    }
+    if (parent->left == child) {
+        parent->left = grand_kid;
+    }
+
+    // release the memory
+    delete child;
+}
 
 template <typename T>
 void BST<T>::print() const {
@@ -236,7 +263,7 @@ void BST<T>::deleteNode(const T& val) {
         std::cout << "Delete: No value in the BST\n";
         return;
     }
-    BTNode<T>* parent = seachParent(val);
+    BTNode<T>* parent = searchParent(val);
 
     if(node->isLeaf()) {
         deleteLeaf(node, parent);

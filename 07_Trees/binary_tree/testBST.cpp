@@ -36,7 +36,8 @@ int main(void) {
 
     tree.deleteNode(2);
     tree.print();
-    
+    tree.deleteNode(3);
+    tree.print();
 
     return 0;
 }
