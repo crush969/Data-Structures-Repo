@@ -294,7 +294,7 @@ void BST<T>::deleteNodeWithTwoChildren(BTNode<T>* node) {
 template <typename T>
 int BST<T>::getHeight(const BTNode<T>* node) const {
     if(!node) {
-        return;
+        return 0;
     }
     int left_height = getHeight(node->left);
     int right_height = getHeight(node->right);
@@ -305,7 +305,7 @@ int BST<T>::getHeight(const BTNode<T>* node) const {
 template <typename T>
 int BST<T>::getBalance(const BTNode<T>* node) const {
     if(!node) {
-        return;
+        return 0;
     }
     return getHeight(node->left) - getHeight(node->right);
 }
