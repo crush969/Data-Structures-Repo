@@ -311,12 +311,46 @@ int BST<T>::getBalance(const BTNode<T>* node) const {
 }
 
 template <typename T>
-void BST<T>::rotateRight(BTNode<T>* & node) {
+void BST<T>::rotateRightRef(BTNode<T>*& node) {
     if (!node || !node->left) {
-        return node;
+        return;
     }
     BTNode<T>* left_kid = node->left;
-    node->left = left->kid->right;
+    node->left = left_kid->right;
     left_kid->right = node;
-    node = left_kid;
+
+    return left_kid;
 }
+
+template <typename T>
+void BST<T>::rotateLeftRef(BTNode<T>*& node) {
+    if (!node || !node->right) {
+        return;
+    }
+    BTNode<T>* right_kid = node->right;
+    node->right = right_kid->left;
+    left_kid->left = node;
+
+    return right_kid;
+}
+
+template <typename T>
+void BST<T>::rotateLeftDoubleRef(BTNode<T>*& node) {
+    if (!node || !node->right) {
+        return;
+    }
+    rotateRightRef(node->right);
+    rotateLeftRef(node);
+}
+
+template <typename T>
+void BST<T>::rotateRightDoubleRef(BTNode<T>*& node) {
+    if(!node || !node->left) {
+        return;
+    }
+    rotateLeftRef(node->left);
+    rotateRightRef(node);
+}
+
+template <typename T>
+void BST<T>::balance(BTNode<T>*& node) {}

@@ -31,7 +31,13 @@ class BST {
 
         int getHeight(const BTNode<T>* node) const;
         int getBalance(const BTNode<T>* node) const;
-        void rotateRight(BTNode<T>* & node);
+        void rotateRightRef(BTNode<T>*& node);
+        void rotateLeftRef(BTNode<T>*& node);
+        void rotateRightDoubleRef(BTNode<T>*& node);
+        void rotateLeftDoubleRef(BTNode<T>*& node);
+        void balance(BTNode<T>*& node);
+
+
 
         
     private:
