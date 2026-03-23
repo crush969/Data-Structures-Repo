@@ -10,6 +10,11 @@ int main(void) {
     }
 
     heap.print();
+    for (int i = 0; i < 10; i++) {
+        heap.deleteMin();
+        heap.print();
+        std::cout << "----------\n";
+    }
 
     return 0;
 }
