@@ -3,6 +3,16 @@
 #include <iostream>
 
 template <typename T>
+MinHeap<T>::MinHeap() {
+
+}
+
+template <typename T>
+MinHeap<T>::MinHeap(const std::vector<T>& v) : data(v) {
+    heapify();
+}
+
+template <typename T>
 void MinHeap<T>::insert(const T& val) {
     data.push_back(val);
     percolateUp();
@@ -71,8 +81,8 @@ T MinHeap<T>::deleteMin() {
 }
 
 template <typename T>
-void MinHeap<T>::percolateDown() {
-    int index = 0;
+void MinHeap<T>::percolateDown(int i) {
+    int index = i;
     int size = data.size();
 
     while(getLeftKidIndex(index) < size) {
@@ -89,5 +99,12 @@ void MinHeap<T>::percolateDown() {
         }
         std::swap(data[index], data[smallest]);
         index = smallest;
+    }
+}
+
+template <typename T>
+void MinHeap<T>::heapify() {
+    for (int i = getLastWithKidsIndex(); i >= 0; i--) {
+        percolateDown(i);
     }
 }
