@@ -52,3 +52,25 @@ void Graph<T>::print() const {
     }
     std::cout << "\n";
 }
+
+template <typename T>
+void Graph<T>::DFS() const {
+    if (vertices.empty()) {
+        return;
+    }
+    std::vector<bool> visited(vertices.size(), false);
+    DFS(0, visited);
+}
+
+template <typename T>
+void Graph<T>::DFS(int i, std::vector<bool>& visited) const {
+    visited[i] = true;
+    std::cout << vertices[i] << " -> ";
+
+    // Look through all the neighbors
+    for(int j : edges[i]) {
+        if(!visited[j]) {
+            DFS(j, visited);
+        }
+    }
+}
