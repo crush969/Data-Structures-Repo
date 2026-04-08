@@ -29,5 +29,9 @@ int main() {
     knowledge.print();
     knowledge.DFS();
 
+    // TODO
+    // 1. Create a disconnected Graph
+    // 2. Update DFS to traverse all the nodes of this graph
+
     return 0;
 }

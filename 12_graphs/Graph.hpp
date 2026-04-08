@@ -11,6 +11,9 @@ class Graph {
         void print() const;
 
         void DFS() const;
+        void BFS(int start = 0) const;
+        int shortestPath(const T& src, const T& dest) const;
+        bool isConnected() const;
 
     private:
         std::vector<T> vertices;
@@ -18,6 +21,7 @@ class Graph {
 
         int getVertexIndex(const T& value) const;
 
+        bool hasEdge(int i1, int i2) const;
         void DFS(int i, std::vector<bool>& visited) const;
 };
 
